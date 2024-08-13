@@ -34,4 +34,35 @@ class RecipeBook:
                 return
         print(f"Recipe '{name}' not found.")
 
-    
+    def search_recipes(self, query): # Searches for a recipe
+       
+        found_recipes = [recipe for recipe in self.recipes if query in recipe.ingredients or query in recipe.category]
+        if found_recipes:
+            print("\nFound Recipes:")
+            for recipe in found_recipes:
+                print(recipe)
+        else:
+            print("No recipes found.")
+
+    def view_recipes(self): # Displays all recipes
+       
+        if not self.recipes:
+            print("No recipes available.")
+        else:
+            print("\nAll Recipes:")
+            for recipe in self.recipes:
+                print(recipe)
+
+def main(): # Main function to run the recipe book organizer
+   
+    recipe_book = RecipeBook()  # Create an instance of RecipeBook
+
+    while True:
+        print("\nRecipe Book Organizer")
+        print("1. Add Recipe")
+        print("2. Edit Recipe")
+        print("3. Search Recipes")
+        print("4. View All Recipes")
+        print("5. Exit")
+
+        
