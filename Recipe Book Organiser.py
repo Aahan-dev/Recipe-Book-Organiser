@@ -1,11 +1,11 @@
 class Recipe:
-    def __init__(self, name, ingredients, category): # Initialize the Recipe class with name, ingredients, and category.
+    def __init__(self, name, ingredients, category): # Innitialize the Recipe class with name, ingredients, and category.
         
         self.name = name
         self.ingredients = ingredients
         self.category = category
 
-    def __str__(self): # Define a string representation of the recipe.
+    def __str__(self): # Define a stringg representation of the recipe.
         
         return f"Recipe Name: {self.name}\nIngredients: {', '.join(self.ingredients)}\nCategory: {self.category}"
 
@@ -14,7 +14,7 @@ class RecipeBook:
         
         self.recipes = []
 
-    def add_recipe(self, name, ingredients, category): # Adds a new recipe to the book
+    def add_recipe(self, name, ingredients, category): # Aadds a new recipe to the book
         
         recipe = Recipe(name, ingredients, category) # Asks for the specifics of the recipe
         self.recipes.append(recipe) # Adds a new recipe to the book
@@ -55,7 +55,7 @@ class RecipeBook:
 
 def main(): # Main function to run the recipe book organizer
    
-    recipe_book = RecipeBook()  # Create an instance of RecipeBook
+    recipe_book = RecipeBook()  # Create aan instance of RecipeBook
 
     while True:
         print("\nRecipe Book Organizer")
@@ -65,4 +65,39 @@ def main(): # Main function to run the recipe book organizer
         print("4. View All Recipes")
         print("5. Exit")
 
-        
+        choice = input("Choose an option: ")
+
+
+        if choice == '1':
+            name = input("Enter recipe name: ")
+            ingredients = input("Enter ingredients (comma-separated): ").split(',')
+            category = input("Enter category: ")
+            recipe_book.add_recipe(name, [ingredient.strip() for ingredient in ingredients], category)
+
+
+        elif choice == '2':
+            name = input("Enter the recipe name to edit: ")
+            new_name = input("Enter new recipe name (leave blank to keep unchanged): ")
+            new_ingredients = input("Enter new ingredients (comma-separated, leave blank to keep unchanged): ")
+            new_category = input("Enter new category (leave blank to keep unchanged): ")
+            recipe_book.edit_recipe(name, new_name if new_name else None,
+                                    [ingredient.strip() for ingredient in new_ingredients.split(',')] if new_ingredients else None,
+                                    new_category if new_category else None)
+
+        elif choice == '3':
+            query = input("Enter ingredient or category to search: ")
+            recipe_book.search_recipes(query)
+
+
+        elif choice == '4':
+            recipe_book.view_recipes()
+
+        elif choice == '5':
+            print("Exiting the Recipe Book application. Goodbye!")
+            break
+
+        else:
+            print("Invalid option. Please choose again.")
+
+if __name__ == "__main__":
+    main()  # Run the mainn function
